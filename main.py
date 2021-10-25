@@ -118,6 +118,7 @@ def random_UID():
     d = hex(random.randint(0, 65535))[2:]
     return "4F2F7F11-" + str(d) + "-" + str(c) + "-" + str(b) + "-6634746" + str(a)
 
+
 def new_event(name, startTime, endTime, location, t, f):
     year = t.strftime("%Y")
     month = t.strftime("%m")
@@ -178,8 +179,8 @@ def isChecked(str):
     else:
         return False
 
-global studentSchedule
 
+global studentSchedule
 
 Heading = ['BEGIN:VCALENDAR',
            'METHOD:PUBLISH',
@@ -228,16 +229,25 @@ def index():
 @app.route("/fill_schedule", methods=["POST", "GET"])
 def fillSchedulePage():
     global studentSchedule
+    global studentID
     if request.method == "POST":
         studentID = request.form["studentID"]
-        blockA = Course(request.form["blockA"], "A", isChecked(request.form.get("blockAlab", False)), isChecked(request.form.get("blockAlate", False)))
-        blockB = Course(request.form["blockB"], "B", isChecked(request.form.get("blockBlab", False)), isChecked(request.form.get("blockBlate", False)))
-        blockC = Course(request.form["blockC"], "C", isChecked(request.form.get("blockClab", False)), isChecked(request.form.get("blockClate", False)))
-        blockD = Course(request.form["blockD"], "D", isChecked(request.form.get("blockDlab", False)), isChecked(request.form.get("blockDlate", False)))
-        blockE = Course(request.form["blockE"], "E", isChecked(request.form.get("blockElab", False)), isChecked(request.form.get("blockElate", False)))
-        blockF = Course(request.form["blockF"], "F", isChecked(request.form.get("blockFlab", False)), isChecked(request.form.get("blockFlate", False)))
-        blockG = Course(request.form["blockG"], "G", isChecked(request.form.get("blockGlab", False)), isChecked(request.form.get("blockGlate", False)))
-        blockH = Course(request.form["blockH"], "H", isChecked(request.form.get("blockHlab", False)), isChecked(request.form.get("blockHlate", False)))
+        blockA = Course(request.form["blockA"], "A", isChecked(request.form.get("blockAlab", False)),
+                        isChecked(request.form.get("blockAlate", False)))
+        blockB = Course(request.form["blockB"], "B", isChecked(request.form.get("blockBlab", False)),
+                        isChecked(request.form.get("blockBlate", False)))
+        blockC = Course(request.form["blockC"], "C", isChecked(request.form.get("blockClab", False)),
+                        isChecked(request.form.get("blockClate", False)))
+        blockD = Course(request.form["blockD"], "D", isChecked(request.form.get("blockDlab", False)),
+                        isChecked(request.form.get("blockDlate", False)))
+        blockE = Course(request.form["blockE"], "E", isChecked(request.form.get("blockElab", False)),
+                        isChecked(request.form.get("blockElate", False)))
+        blockF = Course(request.form["blockF"], "F", isChecked(request.form.get("blockFlab", False)),
+                        isChecked(request.form.get("blockFlate", False)))
+        blockG = Course(request.form["blockG"], "G", isChecked(request.form.get("blockGlab", False)),
+                        isChecked(request.form.get("blockGlate", False)))
+        blockH = Course(request.form["blockH"], "H", isChecked(request.form.get("blockHlab", False)),
+                        isChecked(request.form.get("blockHlate", False)))
         studentSchedule = StudentSchedule(studentID, blockA, blockB, blockC, blockD, blockE, blockF, blockG, blockH)
 
         print(studentSchedule)
@@ -284,7 +294,23 @@ def fillSchedulePage():
 
         f.write("END:VCALENDAR")
 
-    return "<h1>success!</h1>"
+    return redirect("/file_download", 302)
+
+
+@app.route("/file_download")
+def file_downloads():
+    try:
+        return render_template('downloads.html')
+    except Exception as e:
+        return str(e)
+
+@app.route("/return-files/")
+def sendFile():
+    try:
+        fileName = studentID+"_schedule.ics"
+        return send_file(fileName, attachment_filename="Your Schedule.ics")
+    except Exception as e:
+        return str(e)
 
 
 if __name__ == "__main__":
