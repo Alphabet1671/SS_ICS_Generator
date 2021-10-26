@@ -1,0 +1,8 @@
+{
+    "flask": {
+        "image": ":flask-service.flask.X",
+        "ports": {
+            "2328": "HTTP"
+        }
+    }
+}

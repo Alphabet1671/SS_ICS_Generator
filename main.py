@@ -2,6 +2,13 @@ import random
 import datetime
 from flask import *
 
+
+"""aws push command:
+
+aws lightsail push-container-image --region ca-central-1 --service-name container-service-1 --label mystaticsite --image flask
+"""
+
+
 periodMap = [
     ["A", "B", "C", "D", "E", "F"],
     ["G", "D", "E", "H", "A", "B"],
@@ -101,7 +108,7 @@ def StartTime(index, late, wed):
 
 
 def EndTime(index, late, wed, lab):
-    if index == 1 and lab == True:
+    if (index == 1 or index == 4)and lab == True:
         return endTimeMap[int(wed)][index][int(late)]
     else:
         return endTimeMap[int(wed)][index - 1][int(late)]
@@ -314,4 +321,4 @@ def sendFile():
 
 
 if __name__ == "__main__":
-    app.run(port=2020, host="127.0.0.1", debug=True)
+    app.run(port=2328, host="0.0.0.0", debug=True)
