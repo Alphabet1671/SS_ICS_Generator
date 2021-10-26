@@ -2,7 +2,7 @@
     "flask": {
         "image": ":flask-service.flask.X",
         "ports": {
-            "2328": "HTTP"
+            "5000": "HTTP"
         }
     }
 }
