@@ -4,8 +4,8 @@ from flask import *
 
 
 """aws push command:
-
-aws lightsail push-container-image --region ca-central-1 --service-name container-service-1 --label mystaticsite --image flask
+aws lightsail push-container-image --service-name flask-service --label flask-container --image flask
+aws lightsail create-container-service-deployment --service-name flask-service --containers file://containers.json --public-endpoint file://public-endpoint.json
 """
 
 
@@ -228,9 +228,13 @@ remember to adjust for years!!!
 app = Flask(__name__)
 
 
+@app.route("/schedule-filler/")
+def schedule_nav_page():
+    return render_template("schedule-filler.html")
+
+
 @app.route("/")
-def index():
-    return render_template("index.html")
+def index(): return render_template("index.html")
 
 
 @app.route("/fill_schedule", methods=["POST", "GET"])
@@ -319,6 +323,10 @@ def sendFile():
     except Exception as e:
         return str(e)
 
+
+@app.route("/instructions")
+def showInstructions():
+    return render_template("instructions.html")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
