@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSA Senior School ICS file generator</title>
+	<link rel= "stylesheet" href= "{{ url_for('static',filename='styles/site-styling.css') }}">
+	<link rel= "stylesheet" href="/static/styles/site-styling.css">
+</head>
+<body>
+<h1>SSA Senior School Schedule Generator</h1>
+<a href="{{ url_for('index') }}" target="blank"><button class="return-btn">Return to Homepage</button></a>
+<h3>Instructions</h3>
+<h4>Read if you don't wanna miss class LOL</h4>
+<p class="framed-info">
+
+	This website is to help you create an ICS formatted file that you can import to calendar software.</br>
+	Please pull up your schedule on a new tab or on another device, anything that enables you to input your schedule while looking at it would work.</br></br>
+	Your schedule should look something like this:</br>
+
+</p>
+	<div class="gallery">
+  		<a target="_blank" href="img_5terre.jpg">
+   			 <img src="/static/Instruction.png" alt="Cinque Terre" width="600" height="400">
+		</a>
+	</div>
+<p class="framed-info">
+	Please enter your schedule information into the site as indicated in the color-coded instruction picture above.
+	</br>
+	</br>
+	If the course has a "La", check the "Late Lunch" checkbox. If not, leave the box unchecked.
+	</br>
+	</br>
+
+	If there is a free, enter "Free" exactly as typed if you do not want to add it to the calendar, anything else would be added as a class(this is useful if you are a TA).
+
+</p>
+
+
+<form action="/fill_schedule" method = "post">
+	<div class="grid-container">
+		<div class="studentID-input">
+			<label for="studentID">Student ID:</label><br>
+			<input type="text" id="studentID" name="studentID"><br>
+		</div>
+		<div class="course-input">
+			<div class="text-in">
+				<label for="blockA">Block A:</label><br>
+				<input type="text" id="blockA" name="blockA"><br>
+			</div>
+			<div class="checkboxes">
+				<div class="checkbox">
+					<input type="checkbox" id="blockAlab" name="blockAlab" value="True">
+					<label for="blockAlab">Lab Period</label>
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" id="blockAlate" name="blockAlate" value="True">
+					<label for="blockAlab">Late Lunch</label>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="course-input">
+			<div class="text-in">
+				<label for="blockB">Block B:</label><br>
+				<input type="text" id="blockB" name="blockB"><br>
+			</div>
+
+			<div class="checkboxes">
+				<div class="checkbox">
+					<input type="checkbox" id="blockBlab" name="blockBlab" value="True">
+					<label for="blockAlab">Lab Period</label>
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" id="blockBlate" name="blockBlate" value="True">
+					<label for="blockAlab">Late Lunch</label>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="course-input">
+			<div class="text-in">
+				<label for="blockC">Block C:</label><br>
+				<input type="text" id="blockC" name="blockC"><br>
+			</div>
+
+			<div class="checkboxes">
+				<div class="checkbox">
+					<input type="checkbox" id="blockClab" name="blockClab" value="True">
+					<label for="blockClab">Lab Period</label>
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" id="blockClate" name="blockClate" value="True">
+					<label for="blockClab">Late Lunch</label>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="course-input">
+			<div class="text-in">
+				<label for="blockD">Block D:</label><br>
+				<input type="text" id="blockD" name="blockD"><br>
+			</div>
+			<div class="checkboxes">
+				<div class="checkbox">
+					<input type="checkbox" id="blockDlab" name="blockDlab" value="True">
+					<label for="blockDlab">Lab Period</label>
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" id="blockDlate" name="blockDlate" value="True">
+					<label for="blockDlab">Late Lunch</label>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="course-input">
+			<div class="text-in">
+				<label for="blockE">Block E:</label><br>
+				<input type="text" id="blockE" name="blockE"><br>
+			</div>
+
+			<div class="checkboxes">
+				<div class="checkbox">
+					<input type="checkbox" id="blockElab" name="blockElab" value="True">
+					<label for="blockElab">Lab Period</label>
+				</div>
+
+				<div class="checkbox">
+					<input type="checkbox" id="blockElate" name="blockElate" value="True">
+					<label for="blockElab">Late Lunch</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="course-input">
+			<div class="text-in">
+				<label for="blockF">Block F:</label><br>
+				<input type="text" id="blockF" name="blockF"><br>
+			</div>
+			<div class="checkboxes">
+				<div class="checkbox">
+					<input type="checkbox" id="blockFlab" name="blockFlab" value="True">
+					<label for="blockFlab">Lab Period</label>
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" id="blockFlate" name="blockFlate" value="True">
+					<label for="blockFlab">Late Lunch</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="course-input">
+			<div class="text-in">
+				<label for="blockG">Block G:</label><br>
+				<input type="text" id="blockG" name="blockG"><br>
+			</div>
+			<div class="checkboxes">
+				<div class="checkbox">
+					<input type="checkbox" id="blockGlab" name="blockGlab" value="True">
+					<label for="blockGlab">Lab Period</label>
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" id="blockGlate" name="blockGlate" value="True">
+					<label for="blockClab">Late Lunch</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="course-input">
+			<div class="text-in">
+				<label for="blockH">Block H:</label><br>
+				<input type="text" id="blockH" name="blockH"><br>
+			</div>
+			<div class="checkboxes">
+				<div class="checkbox">
+					<input type="checkbox" id="blockHlab" name="blockHlab" value="True">
+					<label for="blockHlab">Lab Period</label>
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" id="blockHlate" name="blockHlate" value="True">
+					<label for="blockHlab">Late Lunch</label>
+				</div>
+			</div>
+		</div>
+				<input type="submit" value="Submit">
+	</div>
+</form>
+
+<p class="credit">This website is developed by Louis Ye, class of 23. </br>Email address:  23yel@shadysideacademy.org</p>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSA Student Tools</title>
+    <link rel= "stylesheet" href= "{{ url_for('static',filename='styles/site-styling.css') }}">
+    <link rel= "stylesheet" href="/static/styles/site-styling.css">
+</head>
+
+<body>
+<h1>SSA Student Tools Home</h1>
+
+<div class="main-ele">
+    <div class="function-cell">
+        <a href="{{ url_for('schedule_nav_page') }}" target="blank"><button class="index-nav-btn">Download Your Schedule</button></a>
+        <p class="description">This tool provides you downloadable file for your calendar.</p>
+    </div>
+
+    <div class="function-cell">
+        <p class="description">
+            More functions coming soon!</br></br>
+            Future plans:</br>
+            Ability to keep your schedule in a database for multiple downloads.</br>
+            Hosting teachers' calendar as subscription to enable more convenient scheduling of meetings.</br></br>
+            Any suggestions on new functions or improvement is welcome!
+            Just send me an email.
+        </p>
+</div>
+
+<p class="credit">This website is developed by Louis Ye, class of 23. </br>Email address:  23yel@shadysideacademy.org</p>
+</body>
+</html>
