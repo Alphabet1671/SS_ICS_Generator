@@ -308,6 +308,78 @@ def fillSchedulePage():
     return redirect("/file_download", 302)
 
 
+@app.route("/teacher-schedule-publish/")
+def FillSchedulePage_teacher():
+    global studentSchedule
+    global teacherName
+
+    if request.method == "POST":
+        teacherName = request.form["studentID"]
+        blockA = Course(request.form["blockA"], "A", isChecked(request.form.get("blockAlab", False)),
+                        isChecked(request.form.get("blockAlate", False)))
+        blockB = Course(request.form["blockB"], "B", isChecked(request.form.get("blockBlab", False)),
+                        isChecked(request.form.get("blockBlate", False)))
+        blockC = Course(request.form["blockC"], "C", isChecked(request.form.get("blockClab", False)),
+                        isChecked(request.form.get("blockClate", False)))
+        blockD = Course(request.form["blockD"], "D", isChecked(request.form.get("blockDlab", False)),
+                        isChecked(request.form.get("blockDlate", False)))
+        blockE = Course(request.form["blockE"], "E", isChecked(request.form.get("blockElab", False)),
+                        isChecked(request.form.get("blockElate", False)))
+        blockF = Course(request.form["blockF"], "F", isChecked(request.form.get("blockFlab", False)),
+                        isChecked(request.form.get("blockFlate", False)))
+        blockG = Course(request.form["blockG"], "G", isChecked(request.form.get("blockGlab", False)),
+                        isChecked(request.form.get("blockGlate", False)))
+        blockH = Course(request.form["blockH"], "H", isChecked(request.form.get("blockHlab", False)),
+                        isChecked(request.form.get("blockHlate", False)))
+        studentSchedule = StudentSchedule(teacherName, blockA, blockB, blockC, blockD, blockE, blockF, blockG, blockH)
+
+        print(studentSchedule)
+        cycleDayMap = []
+        f = open("blockSchedule.txt", "r")
+        currentTime = datetime.datetime.now()
+        for lineTxt in f:
+            txt = lineTxt.split("+")
+            if txt[0] != "\n":
+                timeObj = datetime.datetime.strptime(txt[0], "%A,%b%d").replace(year=currentTime.year)
+                data = [timeObj, txt[1]]
+                cycleDayMap.append(data)
+
+        f.close()
+
+        dateLst = []
+        courseNameLst = []
+        startTimeLst = []
+        endTimeLst = []
+
+        for day in cycleDayMap:
+            periodLst = periodMap[int(day[1]) - 1]
+            periodNum = 1
+            if day[0].strftime("%w") == "3":
+                isWed = 1
+            else:
+                isWed = 0
+            for i in periodLst:
+                if studentSchedule.courseObj(i).name != "Free":
+                    dateLst.append(day[0])
+                    courseNameLst.append(studentSchedule.courseObj(i).name)
+                    startTimeLst.append(StartTime(periodNum, studentSchedule.courseObj(i).late, isWed))
+                    endTimeLst.append(
+                        EndTime(periodNum, studentSchedule.courseObj(i).late, isWed, studentSchedule.courseObj(i).lab))
+                    print(str(day[0]) + "=" + studentSchedule.courseObj(i).name + "=" + str(periodNum) + "\n")
+                periodNum += 1
+
+        f = open(studentSchedule.studentID + "_teacher_schedule.ics", "w")
+        for i in Heading:
+            f.write(i + "\n")
+
+        for i in range(len(dateLst)):
+            new_event(courseNameLst[i], startTimeLst[i], endTimeLst[i], "School", dateLst[i], f)
+
+        f.write("END:VCALENDAR")
+
+    return redirect("/file_download", 302)
+
+
 @app.route("/file_download")
 def file_downloads():
     try:
