@@ -313,15 +313,18 @@ def fillSchedulePage():
 
 @app.route("/search-schedule-page/")
 def search_schedule_page():
-    return render_template("search-schedule-page.html") # This template is yet to be written.
+    return render_template("search-schedule-page.html")  # This template is yet to be written. Should include a search bar and download button.
 
 
-@app.route("/teacher-schedule-search/")
+@app.route("/teacher-schedule-search/", methods=["POST", "GET"])
 def searchSchedule():
     teacherName = request.form["teacher-name"]
-    f = open(teacherName+"teacher_schedule.ics", "r")
-    classLst = f.read().split("+")
-    print(classLst)
+    try:
+        fileName = teacherName+"teacher_schedule.ics"  # missing check if the files exist
+        return send_file(fileName, attachment_filename=teacherName+"schedule.ics")
+    except Exception as e:
+        return str(e)
+
 # complete algorithm for the page here.
 
 

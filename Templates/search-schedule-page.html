@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Schedule Download</title>
+    <link rel= "stylesheet" href= "{{ url_for('static',filename='styles/site-styling.css') }}">
+    <link rel= "stylesheet" href="/static/styles/site-styling.css">
+</head>
+<body>
+
+<h1>Teacher Schedule Download</h1>
+<p>Please enter the teacher's name in the search bar down below to search for their schedule</p><br>
+<div class="teacher-list-div">
+    <p>Teacher schedule on this site:</p><br>
+    <p>Peterson, Scott</p>
+
+</div>
+<form action="{{ url_for('searchSchedule') }}">
+    <div class="search-page-div">
+        <label for="schedule-search-bar">Format: Last, First</label>
+        <input type="text" id="schedule-search-bar" name="schedule-search-bar">
+        <input value="Search & Download" type="submit">
+    </div>
+</form>
+
+
+
+
+</body>
+</html>

@@ -184,3 +184,17 @@ label {
     grid-template-rows;
     grid-gap: 0px;
 }
+
+.search-page-div{
+    display: grid;
+    grid-template-rows 1fr 1fr;
+    grid-gap: 10px;
+    margin: auto;
+    width: 70%;
+}
+.teacher-list-div{
+    display: grid;
+    grid-template-rows 1fr 1fr;
+    grid-gap: 5px;
+    margin: auto;
+}
