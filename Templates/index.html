@@ -12,12 +12,17 @@
 
 <div class="main-ele">
     <div class="function-cell">
-        <a href="{{ url_for('schedule_nav_page') }}" target="blank"><button class="index-nav-btn">Download Your Schedule</button></a>
+        <a href="{{ url_for('schedule_nav_page') }}" target="blank"><button class="index-nav-btn">Download Your Student Schedule</button></a>
         <p class="description">This tool provides you downloadable file for your calendar.</p>
     </div>
 
     <div class="function-cell">
-        <a href="{{ url_for('teacher_schedule_download')}}" target="blank"><button class="index-nav-btn">Download a teacher's schedule</button></a>
+        <a href="{{ url_for('schedule_nav_page_teacher') }}" target="blank"><button class="index-nav-btn">Publish Your Teacher Schedule</button></a>
+        <p class="description">This tool gives you ability to provide students with a downloadable file of the teachers' schedule for more convenient appointments.</p>
+    </div>
+
+    <div class="function-cell">
+        <a href="{{ url_for('searchSchedule_page')}}" target="blank"><button class="index-nav-btn">Download a teacher's schedule</button></a>
         <p class="description">This page leads you to a search page that allows you to download the calendar of a teacher</p>
     </div>
 

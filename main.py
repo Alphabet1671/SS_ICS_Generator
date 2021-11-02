@@ -232,6 +232,10 @@ def schedule_nav_page():
     return render_template("schedule-filler.html")
 
 
+@app.route("/schedule-filler-teacher")
+def schedule_nav_page_teacher():
+    return render_template("schedule-filler-teacher.html")
+
 @app.route("/")
 def index(): return render_template("index.html")
 
@@ -306,14 +310,22 @@ def fillSchedulePage():
 
     return redirect("/file_download", 302)
 
+
+@app.route("/search-schedule-page/")
+def search_schedule_page():
+    return render_template("search-schedule-page.html") # This template is yet to be written.
+
+
 @app.route("/teacher-schedule-search/")
 def searchSchedule():
     teacherName = request.form["teacher-name"]
     f = open(teacherName+"teacher_schedule.ics", "r")
     classLst = f.read().split("+")
     print(classLst)
+# complete algorithm for the page here.
 
-@app.route("/teacher-schedule-publish/")
+
+@app.route("/teacher-schedule-publish/", methods=["POST", "GET"])
 def FillSchedulePage_teacher():
     global studentSchedule
     global teacherName
@@ -394,6 +406,7 @@ def file_downloads():
     except Exception as e:
         return str(e)
 
+
 @app.route("/return-files/")
 def sendFile():
     try:
@@ -406,6 +419,7 @@ def sendFile():
 @app.route("/instructions")
 def showInstructions():
     return render_template("instructions.html")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
