@@ -2,7 +2,6 @@ import random
 import datetime
 from flask import *
 
-
 """aws push command:
 aws lightsail push-container-image --service-name flask-service --label flask-container --image flask
 aws lightsail create-container-service-deployment --service-name flask-service --containers file://containers.json --public-endpoint file://public-endpoint.json
@@ -307,6 +306,12 @@ def fillSchedulePage():
 
     return redirect("/file_download", 302)
 
+@app.route("/teacher-schedule-search/")
+def searchSchedule():
+    teacherName = request.form["teacher-name"]
+    f = open(teacherName+"teacher_schedule.ics", "r")
+    classLst = f.read().split("+")
+    print(classLst)
 
 @app.route("/teacher-schedule-publish/")
 def FillSchedulePage_teacher():
@@ -332,8 +337,10 @@ def FillSchedulePage_teacher():
         blockH = Course(request.form["blockH"], "H", isChecked(request.form.get("blockHlab", False)),
                         isChecked(request.form.get("blockHlate", False)))
         studentSchedule = StudentSchedule(teacherName, blockA, blockB, blockC, blockD, blockE, blockF, blockG, blockH)
-
+        f = open(teacherName+"teacher_schedule.ics", "w")
+        f.write(blockA.name+"+"+blockB.name+"+"+blockC.name+"+"+blockD.name+"+"+blockE.name+"+"+blockF.name+"+"+blockG.name+"+"+blockH.name)
         print(studentSchedule)
+
         cycleDayMap = []
         f = open("blockSchedule.txt", "r")
         currentTime = datetime.datetime.now()

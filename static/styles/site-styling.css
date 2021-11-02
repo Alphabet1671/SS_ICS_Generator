@@ -151,14 +151,14 @@ div [class = text-in] {
 
 label {
     border-bottom: 0.5px solid rgb(225,184,29);
-    text-align: center;
+    text-align: left;
 }
 
 .description {
     color: rgb(225,184,29);
     font-size: 20px;
-    margin: auto;
     padding: 5px;
+    margin: 5px,5px,5px,5px;
 }
 
 .index-nav-btn {
@@ -177,4 +177,10 @@ label {
     grid-template-columns: 1fr;
     grid-gap: 20px;
 
+}
+
+.text-in{
+    display: grid;
+    grid-template-rows;
+    grid-gap: 0px;
 }

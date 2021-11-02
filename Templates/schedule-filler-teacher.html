@@ -10,27 +10,26 @@
 <h1>Teacher Schedule Publish</h1>
 </p>
 	<div class="gallery">
-  		<a target="_blank" href="img_5terre.jpg">
-   			 <img src="/static/Instruction.png" alt="Cinque Terre" width="600" height="400">
+  		<a target="_blank" href="sample-day-0.png">
+   			 <img src="/static/sample-day-0.png" alt="There is supposed to be a picture here!">
 		</a>
 	</div>
 <p class="framed-info">
-	Please enter your schedule information into the site as indicated in the color-coded instruction picture above.
+	Please enter your Day 0 schedule (as illustrated as the picture above).
 	</br>
 	</br>
-	If the course has a "La", check the "Late Lunch" checkbox. If not, leave the box unchecked.
+	<img src="/static/vcschedule.png">
+	If the course has a "La" in the circled area in the picture above, check the "Late Lunch" checkbox. If it says "Ea", leave the box unchecked.
 	</br>
 	</br>
 
 	If there is a free, enter "Free" exactly as typed if you do not want to add it to the calendar, anything else would be added as a class(this is useful if you are a TA).
 
 </p>
-
-
 <form action="/fill_schedule" method = "post">
 	<div class="grid-container">
-		<div class="Teacher Name(Format: Last, First)">
-			<label for="studentID">Student ID:</label><br>
+		<div class="studentID-input">
+			<label for="studentID">Teacher Name (Format: Last, First):</label><br>
 			<input type="text" id="studentID" name="studentID"><br>
 		</div>
 		<div class="course-input">
