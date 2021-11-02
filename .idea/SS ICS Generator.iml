@@ -4,8 +4,8 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <content url="file://$MODULE_DIR$/venv/Templates" />
-    <content url="file://$MODULE_DIR$/venv/static" />
+    <content url="file://$MODULE_DIR$/Templates" />
+    <content url="file://$MODULE_DIR$/static" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
