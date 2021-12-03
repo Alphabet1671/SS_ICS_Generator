@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSA Senior School ICS file generator</title>
+	<link rel= "stylesheet" href= "{{ url_for('static',filename='styles/input-page-styling.css') }}">
+	<link rel= "stylesheet" href="/static/styles/input-page-styling.css">
+</head>
+<body>
+<h1>Detailed Schedule</h1>
+<p>Down below is your full 8-day schedule as it is on the pdf file.</p>
+<form action="/send-adv-schedule" method="post">
+	<div class="schedule-input">
+		<div class="cycle-day" id="day1">
+			<label for="day1" class="day-label">Day 1</label>
+			<div class="schedule-box" id="day-1-period-1">
+				<input type="text" id="day-1-period-1-in" class="schedule-in">
+				<label for="day-1-period-1-in" class="period-label">Period 1</label>
+			</div>
+			<div class="schedule-box" id="day-1-period-2">
+				<input type="text" id="day-1-period-2-in" class="schedule-in">
+				<label for="day-1-period-2-in" class="period-label">Period 2</label>
+			</div>
+			<div class="schedule-box" id="day-1-period-3">
+				<input type="text" id="day-1-period-3-in" class="schedule-in">
+				<label for="day-1-period-3-in" class="period-label">Period 3</label>
+			</div>
+			<div class="schedule-box" id="day-1-period-4">
+				<input type="text" id="day-1-period-4-in" class="schedule-in">
+				<label for="day-1-period-4-in" class="period-label">Period 4</label>
+			</div>
+			<div class="schedule-box" id="day-1-period-5">
+				<input type="text" id="day-1-period-5-in" class="schedule-in">
+				<label for="day-1-period-1-in" class="period-label">Period 5</label>
+			</div>
+			<div class="schedule-box" id="day-1-period-6">
+				<input type="text" id="day-1-period-6-in" class="schedule-in">
+				<label for="day-1-period-1-in" class="period-label">Period 6</label>
+			</div>
+			<div class="schedule-box" id="day-1-period-7">
+				<input type="text" id="day-1-period-7-in" class="schedule-in">
+				<label for="day-1-period-1-in" class="period-label">Period 7</label>
+			</div>
+		</div>
+
+		<div class="cycle-day" id="day2">
+			<label for="day1" class="day-label">Day 2</label>
+			<div class="schedule-box" id="day-2-period-1">
+				<input type="text" id="day-2-period-1-in" class="schedule-in">
+				<label for="day-2-period-1-in" class="period-label">Period 1</label>
+			</div>
+			<div class="schedule-box" id="day-2-period-2">
+				<input type="text" id="day-2-period-2-in" class="schedule-in">
+				<label for="day-2-period-2-in" class="period-label">Period 2</label>
+			</div>
+			<div class="schedule-box" id="day-2-period-3">
+				<input type="text" id="day-2-period-3-in" class="schedule-in">
+				<label for="day-2-period-3-in" class="period-label">Period 3</label>
+			</div>
+			<div class="schedule-box" id="day-2-period-4">
+				<input type="text" id="day-2-period-4-in" class="schedule-in">
+				<label for="day-2-period-4-in" class="period-label">Period 4</label>
+			</div>
+			<div class="schedule-box" id="day-2-period-5">
+				<input type="text" id="day-2-period-5-in" class="schedule-in">
+				<label for="day-2-period-1-in" class="period-label">Period 5</label>
+			</div>
+			<div class="schedule-box" id="day-2-period-6">
+				<input type="text" id="day-2-period-6-in" class="schedule-in">
+				<label for="day-2-period-1-in" class="period-label">Period 6</label>
+			</div>
+			<div class="schedule-box" id="day-2-period-7">
+				<input type="text" id="day-2-period-7-in" class="schedule-in">
+				<label for="day-2-period-1-in" class="period-label">Period 7</label>
+			</div>
+		</div>
+	</div>
+</form>
+</body>
