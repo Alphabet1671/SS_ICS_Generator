@@ -24,7 +24,7 @@ startTimeMap = [
     [
         ["081500", "081500"],
         ["091000", "091000"],
-        ["103500", "103500"],
+        ["100500", "100500"],
         ["115000", "122500"],
         ["132000", "132000"],
         ["141500", "141500"]
@@ -232,10 +232,6 @@ def schedule_nav_page():
     return render_template("schedule-filler.html")
 
 
-@app.route("/schedule-filler-teacher")
-def schedule_nav_page_teacher():
-    return render_template("schedule-filler-teacher.html")
-
 @app.route("/")
 def index(): return render_template("index.html")
 
@@ -311,97 +307,6 @@ def fillSchedulePage():
     return redirect("/file_download", 302)
 
 
-@app.route("/search-schedule-page/")
-def search_schedule_page():
-    return render_template("search-schedule-page.html")  # This template is yet to be written. Should include a search bar and download button.
-
-
-@app.route("/teacher-schedule-search/", methods=["POST", "GET"])
-def searchSchedule():
-    teacherName = request.form["teacher-name"]
-    try:
-        fileName = teacherName+"teacher_schedule.ics"  # missing check if the files exist
-        return send_file(fileName, attachment_filename=teacherName+"schedule.ics")
-    except Exception as e:
-        return str(e)
-
-# complete algorithm for the page here.
-
-
-@app.route("/teacher-schedule-publish/", methods=["POST", "GET"])
-def FillSchedulePage_teacher():
-    global studentSchedule
-    global teacherName
-
-    if request.method == "POST":
-        teacherName = request.form["studentID"]
-        blockA = Course(request.form["blockA"], "A", isChecked(request.form.get("blockAlab", False)),
-                        isChecked(request.form.get("blockAlate", False)))
-        blockB = Course(request.form["blockB"], "B", isChecked(request.form.get("blockBlab", False)),
-                        isChecked(request.form.get("blockBlate", False)))
-        blockC = Course(request.form["blockC"], "C", isChecked(request.form.get("blockClab", False)),
-                        isChecked(request.form.get("blockClate", False)))
-        blockD = Course(request.form["blockD"], "D", isChecked(request.form.get("blockDlab", False)),
-                        isChecked(request.form.get("blockDlate", False)))
-        blockE = Course(request.form["blockE"], "E", isChecked(request.form.get("blockElab", False)),
-                        isChecked(request.form.get("blockElate", False)))
-        blockF = Course(request.form["blockF"], "F", isChecked(request.form.get("blockFlab", False)),
-                        isChecked(request.form.get("blockFlate", False)))
-        blockG = Course(request.form["blockG"], "G", isChecked(request.form.get("blockGlab", False)),
-                        isChecked(request.form.get("blockGlate", False)))
-        blockH = Course(request.form["blockH"], "H", isChecked(request.form.get("blockHlab", False)),
-                        isChecked(request.form.get("blockHlate", False)))
-        studentSchedule = StudentSchedule(teacherName, blockA, blockB, blockC, blockD, blockE, blockF, blockG, blockH)
-        f = open(teacherName+"teacher_schedule.ics", "w")
-        f.write(blockA.name+"+"+blockB.name+"+"+blockC.name+"+"+blockD.name+"+"+blockE.name+"+"+blockF.name+"+"+blockG.name+"+"+blockH.name)
-        print(studentSchedule)
-
-        cycleDayMap = []
-        f = open("blockSchedule.txt", "r")
-        currentTime = datetime.datetime.now()
-        for lineTxt in f:
-            txt = lineTxt.split("+")
-            if txt[0] != "\n":
-                timeObj = datetime.datetime.strptime(txt[0], "%A,%b%d").replace(year=currentTime.year)
-                data = [timeObj, txt[1]]
-                cycleDayMap.append(data)
-
-        f.close()
-
-        dateLst = []
-        courseNameLst = []
-        startTimeLst = []
-        endTimeLst = []
-
-        for day in cycleDayMap:
-            periodLst = periodMap[int(day[1]) - 1]
-            periodNum = 1
-            if day[0].strftime("%w") == "3":
-                isWed = 1
-            else:
-                isWed = 0
-            for i in periodLst:
-                if studentSchedule.courseObj(i).name != "Free":
-                    dateLst.append(day[0])
-                    courseNameLst.append(studentSchedule.courseObj(i).name)
-                    startTimeLst.append(StartTime(periodNum, studentSchedule.courseObj(i).late, isWed))
-                    endTimeLst.append(
-                        EndTime(periodNum, studentSchedule.courseObj(i).late, isWed, studentSchedule.courseObj(i).lab))
-                    print(str(day[0]) + "=" + studentSchedule.courseObj(i).name + "=" + str(periodNum) + "\n")
-                periodNum += 1
-
-        f = open(studentSchedule.studentID + "_teacher_schedule.ics", "w")
-        for i in Heading:
-            f.write(i + "\n")
-
-        for i in range(len(dateLst)):
-            new_event(courseNameLst[i], startTimeLst[i], endTimeLst[i], "School", dateLst[i], f)
-
-        f.write("END:VCALENDAR")
-
-    return redirect("/file_download", 302)
-
-
 @app.route("/file_download")
 def file_downloads():
     try:
@@ -418,11 +323,20 @@ def sendFile():
     except Exception as e:
         return str(e)
 
+@app.route("/adv-filler-page/")
+def adv_filler():
+    return render_template("adv-schedule-filler.html")
 
-@app.route("/instructions")
-def showInstructions():
-    return render_template("instructions.html")
 
+@app.route("/send-adv-schedule/")
+def send_adv_schedule():
+    # Not completed backend!!!!
+    advScheduleLst = [[]]
+
+    for day in range(1,8):
+        for prd in range(1,7):
+            advScheduleLst[day][prd] = request.form("day"+day+"-period-"+prd+"-in")
+    # Input processing wrote into 2D lst
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
