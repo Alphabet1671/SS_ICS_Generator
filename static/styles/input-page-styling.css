@@ -1,0 +1,11 @@
+.schedule-input{
+    display: grid;
+    grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+    border: 5px solid black;
+}
+
+.cycle-day{
+    display: grid;
+    grid-template-rows: 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% ;
+    border: 2px solid black;
+}
