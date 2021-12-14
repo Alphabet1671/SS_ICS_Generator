@@ -7,5 +7,12 @@
 .cycle-day{
     display: grid;
     grid-template-rows: 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% ;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.schedule-box{
+    display: grid;
+    grid-template-rows: 70% 20%;
     border: 2px solid black;
 }

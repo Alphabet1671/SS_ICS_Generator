@@ -41,7 +41,7 @@ startTimeMap = [
 endTimeMap = [
     [
         ["090500", "090500"],
-        ["103000", "103000"],
+        ["100500", "100500"],
         ["114500", "114500"],
         ["124000", "131500"],
         ["141000", "141000"],
@@ -323,6 +323,7 @@ def sendFile():
     except Exception as e:
         return str(e)
 
+
 @app.route("/adv-filler-page/")
 def adv_filler():
     return render_template("adv-schedule-filler.html")
@@ -330,6 +331,7 @@ def adv_filler():
 
 @app.route("/send-adv-schedule/")
 def send_adv_schedule():
+
     # Not completed backend!!!!
     advScheduleLst = [[]]
 
@@ -337,6 +339,23 @@ def send_adv_schedule():
         for prd in range(1,7):
             advScheduleLst[day][prd] = request.form("day"+day+"-period-"+prd+"-in")
     # Input processing wrote into 2D lst
+    cycleDays = []
+    f = open("blockSchedule.txt", "r")
+    currentTime = datetime.datetime.now()
+    for lineTxt in f:
+        txt = lineTxt.split("+")
+        if txt[0] != "\n":
+            timeObj = datetime.datetime.strptime(txt[0], "%A,%b%d").replace(year=currentTime.year)
+            data = [timeObj, txt[1]]
+            cycleDays.append(data)
+    f.close()
+    # Pulled cycle day schedule from file
+    f = open("Adv_schedule_test.ics", "w")
+    for day in cycleDays:
+        for p in range(1, 7):
+            if advScheduleLst[day[1]][p] != "":
+                new_event(advScheduleLst, startTimeMap[0][0], endTimeMap[0][0], "School", day[0], f)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
