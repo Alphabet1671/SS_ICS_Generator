@@ -107,7 +107,7 @@ def StartTime(index, late, wed):
 
 
 def EndTime(index, late, wed, lab):
-    if (index == 1 or index == 4)and lab == True:
+    if (index == 1 or index == 4) and (lab == True):
         return endTimeMap[int(wed)][index][int(late)]
     else:
         return endTimeMap[int(wed)][index - 1][int(late)]
@@ -225,7 +225,7 @@ remember to adjust for years!!!
 """
 
 app = Flask(__name__)
-
+global studentID
 
 @app.route("/schedule-filler/")
 def schedule_nav_page():
@@ -239,7 +239,6 @@ def index(): return render_template("index.html")
 @app.route("/fill_schedule", methods=["POST", "GET"])
 def fillSchedulePage():
     global studentSchedule
-    global studentID
     if request.method == "POST":
         studentID = request.form["studentID"]
         blockA = Course(request.form["blockA"], "A", isChecked(request.form.get("blockAlab", False)),
@@ -329,15 +328,26 @@ def adv_filler():
     return render_template("adv-schedule-filler.html")
 
 
-@app.route("/send-adv-schedule/")
+@app.route("/send-adv-schedule/", methods=["POST", "GET"])
 def send_adv_schedule():
 
     # Not completed backend!!!!
-    advScheduleLst = [[]]
+    advScheduleLst = [
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+    ]
 
-    for day in range(1,8):
-        for prd in range(1,7):
-            advScheduleLst[day][prd] = request.form("day"+day+"-period-"+prd+"-in")
+    for day in range(0, 7):
+        for prd in range(0, 6):
+            inputId = "day-"+str(day+1)+"-period-"+str(prd+1)+"-in"
+            advScheduleLst[day][prd] = request.form[inputId]
+    studentID_adv = request.form["stu-id-in"]
     # Input processing wrote into 2D lst
     cycleDays = []
     f = open("blockSchedule.txt", "r")
@@ -346,16 +356,23 @@ def send_adv_schedule():
         txt = lineTxt.split("+")
         if txt[0] != "\n":
             timeObj = datetime.datetime.strptime(txt[0], "%A,%b%d").replace(year=currentTime.year)
-            data = [timeObj, txt[1]]
+            data = [timeObj, int(txt[1])]
             cycleDays.append(data)
     f.close()
     # Pulled cycle day schedule from file
-    f = open("Adv_schedule_test.ics", "w")
+    f = open(studentID_adv+"_schedule.ics", "w")
     for day in cycleDays:
-        for p in range(1, 7):
-            if advScheduleLst[day[1]][p] != "":
-                new_event(advScheduleLst, startTimeMap[0][0], endTimeMap[0][0], "School", day[0], f)
+        for p in range(0, 6):
+            if advScheduleLst[day[1]-1][p] != "":
+                new_event(advScheduleLst[day[1]-1][p], StartTime(p, False, False), EndTime(p, False, False, False), "School", day[0], f) #Need adjustment for Weds
+    f.write("END:VCALENDAR")
+    f.close()
+    try:
+        fileName = studentID_adv+"_schedule.ics"
+        return send_file(fileName, attachment_filename="Your Schedule.ics")
+    except Exception as e:
+        return str(e)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(port=2328, host="0.0.0.0", debug=True)

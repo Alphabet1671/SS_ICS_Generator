@@ -9,36 +9,38 @@
 <body>
 <h1>Detailed Schedule</h1>
 <p>Down below is your full 8-day schedule as it is on the pdf file.</p>
-<form action="/send-adv-schedule" method="post">
+<form action="{{ url_for('send_adv_schedule')}}" method="post">
+	<input type="text" class="stu-id-in" id="stu-id-in" name="stu-id-in">
+	<label for="stu-id-in" class="stu-id-in">Your Student ID here</label>
 	<div class="schedule-input">
 		<div class="cycle-day" id="day1">
 			<label for="day1" class="day-label">Day 1</label>
 			<div class="schedule-box" id="day-1-period-1">
-				<input type="text" id="day-1-period-1-in" class="schedule-in">
+				<input type="text" id="day-1-period-1-in" class="schedule-in" name="day-1-period-1-in">
 				<label for="day-1-period-1-in" class="period-label">Period 1</label>
 			</div>
 			<div class="schedule-box" id="day-1-period-2">
-				<input type="text" id="day-1-period-2-in" class="schedule-in">
+				<input type="text" id="day-1-period-2-in" class="schedule-in" name="day-1-period-2-in">
 				<label for="day-1-period-2-in" class="period-label">Period 2</label>
 			</div>
 			<div class="schedule-box" id="day-1-period-3">
-				<input type="text" id="day-1-period-3-in" class="schedule-in">
+				<input type="text" id="day-1-period-3-in" class="schedule-in" name="day-1-period-3-in">
 				<label for="day-1-period-3-in" class="period-label">Period 3</label>
 			</div>
 			<div class="schedule-box" id="day-1-period-4">
-				<input type="text" id="day-1-period-4-in" class="schedule-in">
+				<input type="text" id="day-1-period-4-in" class="schedule-in" name="day-1-period-4-in">
 				<label for="day-1-period-4-in" class="period-label">Period 4</label>
 			</div>
 			<div class="schedule-box" id="day-1-period-5">
-				<input type="text" id="day-1-period-5-in" class="schedule-in">
+				<input type="text" id="day-1-period-5-in" class="schedule-in" name="day-1-period-5-in">
 				<label for="day-1-period-1-in" class="period-label">Period 5</label>
 			</div>
 			<div class="schedule-box" id="day-1-period-6">
-				<input type="text" id="day-1-period-6-in" class="schedule-in">
+				<input type="text" id="day-1-period-6-in" class="schedule-in" name="day-1-period-6-in">
 				<label for="day-1-period-1-in" class="period-label">Period 6</label>
 			</div>
 			<div class="schedule-box" id="day-1-period-7">
-				<input type="text" id="day-1-period-7-in" class="schedule-in">
+				<input type="text" id="day-1-period-7-in" class="schedule-in" name="day-1-period-7-in">
 				<label for="day-1-period-1-in" class="period-label">Athletics</label>
 			</div>
 		</div>
@@ -46,31 +48,31 @@
 		<div class="cycle-day" id="day2">
 			<label for="day1" class="day-label">Day 2</label>
 			<div class="schedule-box" id="day-2-period-1">
-				<input type="text" id="day-2-period-1-in" class="schedule-in">
+				<input type="text" id="day-2-period-1-in" class="schedule-in" name="day-2-period-1-in">
 				<label for="day-2-period-1-in" class="period-label">Period 1</label>
 			</div>
 			<div class="schedule-box" id="day-2-period-2">
-				<input type="text" id="day-2-period-2-in" class="schedule-in">
+				<input type="text" id="day-2-period-2-in" class="schedule-in" name="day-2-period-2-in">
 				<label for="day-2-period-2-in" class="period-label">Period 2</label>
 			</div>
 			<div class="schedule-box" id="day-2-period-3">
-				<input type="text" id="day-2-period-3-in" class="schedule-in">
+				<input type="text" id="day-2-period-3-in" class="schedule-in" name="day-2-period-3-in">
 				<label for="day-2-period-3-in" class="period-label">Period 3</label>
 			</div>
 			<div class="schedule-box" id="day-2-period-4">
-				<input type="text" id="day-2-period-4-in" class="schedule-in">
+				<input type="text" id="day-2-period-4-in" class="schedule-in" name="day-2-period-4-in">
 				<label for="day-2-period-4-in" class="period-label">Period 4</label>
 			</div>
 			<div class="schedule-box" id="day-2-period-5">
-				<input type="text" id="day-2-period-5-in" class="schedule-in">
+				<input type="text" id="day-2-period-5-in" class="schedule-in" name="day-2-period-5-in">
 				<label for="day-2-period-1-in" class="period-label">Period 5</label>
 			</div>
 			<div class="schedule-box" id="day-2-period-6">
-				<input type="text" id="day-2-period-6-in" class="schedule-in">
+				<input type="text" id="day-2-period-6-in" class="schedule-in" name="day-2-period-6-in">
 				<label for="day-2-period-1-in" class="period-label">Period 6</label>
 			</div>
 			<div class="schedule-box" id="day-2-period-7">
-				<input type="text" id="day-2-period-7-in" class="schedule-in">
+				<input type="text" id="day-2-period-7-in" class="schedule-in" name="day-2-period-7-in">
 				<label for="day-2-period-1-in" class="period-label">Athletics</label>
 			</div>
 		</div>
@@ -78,31 +80,31 @@
 		<div class="cycle-day" id="day3">
 			<label for="day1" class="day-label">Day 3</label>
 			<div class="schedule-box" id="day-3-period-1">
-				<input type="text" id="day-3-period-1-in" class="schedule-in">
+				<input type="text" id="day-3-period-1-in" class="schedule-in" name="day-3-period-1-in">
 				<label for="day-3-period-1-in" class="period-label">Period 1</label>
 			</div>
 			<div class="schedule-box" id="day-3-period-2">
-				<input type="text" id="day-3-period-2-in" class="schedule-in">
+				<input type="text" id="day-3-period-2-in" class="schedule-in" name="day-3-period-2-in">
 				<label for="day-3-period-2-in" class="period-label">Period 2</label>
 			</div>
 			<div class="schedule-box" id="day-3-period-3">
-				<input type="text" id="day-3-period-3-in" class="schedule-in">
+				<input type="text" id="day-3-period-3-in" class="schedule-in" name="day-3-period-3-in">
 				<label for="day-3-period-3-in" class="period-label">Period 3</label>
 			</div>
 			<div class="schedule-box" id="day-3-period-4">
-				<input type="text" id="day-3-period-4-in" class="schedule-in">
+				<input type="text" id="day-3-period-4-in" class="schedule-in" name="day-3-period-4-in">
 				<label for="day-3-period-4-in" class="period-label">Period 4</label>
 			</div>
 			<div class="schedule-box" id="day-3-period-5">
-				<input type="text" id="day-3-period-5-in" class="schedule-in">
+				<input type="text" id="day-3-period-5-in" class="schedule-in" name="day-3-period-5-in">
 				<label for="day-3-period-1-in" class="period-label">Period 5</label>
 			</div>
 			<div class="schedule-box" id="day-3-period-6">
-				<input type="text" id="day-3-period-6-in" class="schedule-in">
+				<input type="text" id="day-3-period-6-in" class="schedule-in" name="day-3-period-6-in">
 				<label for="day-3-period-1-in" class="period-label">Period 6</label>
 			</div>
 			<div class="schedule-box" id="day-3-period-7">
-				<input type="text" id="day-3-period-7-in" class="schedule-in">
+				<input type="text" id="day-3-period-7-in" class="schedule-in" name="day-3-period-7-in">
 				<label for="day-3-period-1-in" class="period-label">Athletics</label>
 			</div>
 		</div>
@@ -110,31 +112,31 @@
 		<div class="cycle-day" id="day4">
 			<label for="day1" class="day-label">Day 4</label>
 			<div class="schedule-box" id="day-4-period-1">
-				<input type="text" id="day-4-period-1-in" class="schedule-in">
+				<input type="text" id="day-4-period-1-in" class="schedule-in" name="day-4-period-1-in">
 				<label for="day-4-period-1-in" class="period-label">Period 1</label>
 			</div>
 			<div class="schedule-box" id="day-4-period-2">
-				<input type="text" id="day-4-period-2-in" class="schedule-in">
+				<input type="text" id="day-4-period-2-in" class="schedule-in" name="day-4-period-2-in">
 				<label for="day-4-period-2-in" class="period-label">Period 2</label>
 			</div>
 			<div class="schedule-box" id="day-4-period-3">
-				<input type="text" id="day-4-period-3-in" class="schedule-in">
+				<input type="text" id="day-4-period-3-in" class="schedule-in" name="day-4-period-3-in">
 				<label for="day-4-period-3-in" class="period-label">Period 3</label>
 			</div>
 			<div class="schedule-box" id="day-4-period-4">
-				<input type="text" id="day-4-period-4-in" class="schedule-in">
+				<input type="text" id="day-4-period-4-in" class="schedule-in" name="day-4-period-4-in">
 				<label for="day-4-period-4-in" class="period-label">Period 4</label>
 			</div>
 			<div class="schedule-box" id="day-4-period-5">
-				<input type="text" id="day-4-period-5-in" class="schedule-in">
+				<input type="text" id="day-4-period-5-in" class="schedule-in" name="day-4-period-5-in">
 				<label for="day-4-period-1-in" class="period-label">Period 5</label>
 			</div>
 			<div class="schedule-box" id="day-4-period-6">
-				<input type="text" id="day-4-period-6-in" class="schedule-in">
+				<input type="text" id="day-4-period-6-in" class="schedule-in" name="day-4-period-6-in">
 				<label for="day-4-period-1-in" class="period-label">Period 6</label>
 			</div>
 			<div class="schedule-box" id="day-4-period-7">
-				<input type="text" id="day-4-period-7-in" class="schedule-in">
+				<input type="text" id="day-4-period-7-in" class="schedule-in" name="day-4-period-7-in">
 				<label for="day-4-period-1-in" class="period-label">Athletics</label>
 			</div>
 		</div>
@@ -142,31 +144,31 @@
 		<div class="cycle-day" id="day5">
 			<label for="day1" class="day-label">Day 5</label>
 			<div class="schedule-box" id="day-5-period-1">
-				<input type="text" id="day-5-period-1-in" class="schedule-in">
+				<input type="text" id="day-5-period-1-in" class="schedule-in" name="day-5-period-1-in">
 				<label for="day-5-period-1-in" class="period-label">Period 1</label>
 			</div>
 			<div class="schedule-box" id="day-5-period-2">
-				<input type="text" id="day-5-period-2-in" class="schedule-in">
+				<input type="text" id="day-5-period-2-in" class="schedule-in" name="day-5-period-2-in">
 				<label for="day-5-period-2-in" class="period-label">Period 2</label>
 			</div>
 			<div class="schedule-box" id="day-5-period-3">
-				<input type="text" id="day-5-period-3-in" class="schedule-in">
+				<input type="text" id="day-5-period-3-in" class="schedule-in" name="day-5-period-3-in">
 				<label for="day-5-period-3-in" class="period-label">Period 3</label>
 			</div>
 			<div class="schedule-box" id="day-5-period-4">
-				<input type="text" id="day-5-period-4-in" class="schedule-in">
+				<input type="text" id="day-5-period-4-in" class="schedule-in" name="day-5-period-4-in">
 				<label for="day-5-period-4-in" class="period-label">Period 4</label>
 			</div>
 			<div class="schedule-box" id="day-5-period-5">
-				<input type="text" id="day-5-period-5-in" class="schedule-in">
+				<input type="text" id="day-5-period-5-in" class="schedule-in" name="day-5-period-5-in">
 				<label for="day-5-period-1-in" class="period-label">Period 5</label>
 			</div>
 			<div class="schedule-box" id="day-5-period-6">
-				<input type="text" id="day-5-period-6-in" class="schedule-in">
+				<input type="text" id="day-5-period-6-in" class="schedule-in" name="day-5-period-6-in">
 				<label for="day-5-period-1-in" class="period-label">Period 6</label>
 			</div>
 			<div class="schedule-box" id="day-5-period-7">
-				<input type="text" id="day-5-period-7-in" class="schedule-in">
+				<input type="text" id="day-5-period-7-in" class="schedule-in" name="day-5-period-7-in">
 				<label for="day-5-period-1-in" class="period-label">Athletics</label>
 			</div>
 		</div>
@@ -174,31 +176,31 @@
 		<div class="cycle-day" id="day6">
 			<label for="day1" class="day-label">Day 6</label>
 			<div class="schedule-box" id="day-6-period-1">
-				<input type="text" id="day-6-period-1-in" class="schedule-in">
+				<input type="text" id="day-6-period-1-in" class="schedule-in" name="day-6-period-1-in">
 				<label for="day-6-period-1-in" class="period-label">Period 1</label>
 			</div>
 			<div class="schedule-box" id="day-6-period-2">
-				<input type="text" id="day-6-period-2-in" class="schedule-in">
+				<input type="text" id="day-6-period-2-in" class="schedule-in" name="day-6-period-2-in">
 				<label for="day-6-period-2-in" class="period-label">Period 2</label>
 			</div>
 			<div class="schedule-box" id="day-6-period-3">
-				<input type="text" id="day-6-period-3-in" class="schedule-in">
+				<input type="text" id="day-6-period-3-in" class="schedule-in" name="day-6-period-3-in">
 				<label for="day-6-period-3-in" class="period-label">Period 3</label>
 			</div>
 			<div class="schedule-box" id="day-6-period-4">
-				<input type="text" id="day-6-period-4-in" class="schedule-in">
+				<input type="text" id="day-6-period-4-in" class="schedule-in" name="day-6-period-4-in">
 				<label for="day-6-period-4-in" class="period-label">Period 4</label>
 			</div>
 			<div class="schedule-box" id="day-6-period-5">
-				<input type="text" id="day-6-period-5-in" class="schedule-in">
+				<input type="text" id="day-6-period-5-in" class="schedule-in" name="day-6-period-5-in">
 				<label for="day-6-period-1-in" class="period-label">Period 5</label>
 			</div>
 			<div class="schedule-box" id="day-6-period-6">
-				<input type="text" id="day-6-period-6-in" class="schedule-in">
+				<input type="text" id="day-6-period-6-in" class="schedule-in" name="day-6-period-6-in">
 				<label for="day-6-period-1-in" class="period-label">Period 6</label>
 			</div>
 			<div class="schedule-box" id="day-6-period-7">
-				<input type="text" id="day-6-period-7-in" class="schedule-in">
+				<input type="text" id="day-6-period-7-in" class="schedule-in" name="day-6-period-7-in">
 				<label for="day-6-period-1-in" class="period-label">Athletics</label>
 			</div>
 		</div>
@@ -206,31 +208,31 @@
 		<div class="cycle-day" id="day7">
 			<label for="day1" class="day-label">Day 7</label>
 			<div class="schedule-box" id="day-7-period-1">
-				<input type="text" id="day-7-period-1-in" class="schedule-in">
+				<input type="text" id="day-7-period-1-in" class="schedule-in" name="day-7-period-1-in">
 				<label for="day-7-period-1-in" class="period-label">Period 1</label>
 			</div>
 			<div class="schedule-box" id="day-7-period-2">
-				<input type="text" id="day-7-period-2-in" class="schedule-in">
+				<input type="text" id="day-7-period-2-in" class="schedule-in" name="day-7-period-2-in">
 				<label for="day-7-period-2-in" class="period-label">Period 2</label>
 			</div>
 			<div class="schedule-box" id="day-7-period-3">
-				<input type="text" id="day-7-period-3-in" class="schedule-in">
+				<input type="text" id="day-7-period-3-in" class="schedule-in" name="day-7-period-3-in">
 				<label for="day-7-period-3-in" class="period-label">Period 3</label>
 			</div>
 			<div class="schedule-box" id="day-7-period-4">
-				<input type="text" id="day-7-period-4-in" class="schedule-in">
+				<input type="text" id="day-7-period-4-in" class="schedule-in" name="day-7-period-4-in">
 				<label for="day-7-period-4-in" class="period-label">Period 4</label>
 			</div>
 			<div class="schedule-box" id="day-7-period-5">
-				<input type="text" id="day-7-period-5-in" class="schedule-in">
+				<input type="text" id="day-7-period-5-in" class="schedule-in" name="day-7-period-5-in">
 				<label for="day-7-period-1-in" class="period-label">Period 5</label>
 			</div>
 			<div class="schedule-box" id="day-7-period-6">
-				<input type="text" id="day-7-period-6-in" class="schedule-in">
+				<input type="text" id="day-7-period-6-in" class="schedule-in" name="day-7-period-6-in">
 				<label for="day-7-period-1-in" class="period-label">Period 6</label>
 			</div>
 			<div class="schedule-box" id="day-7-period-7">
-				<input type="text" id="day-7-period-7-in" class="schedule-in">
+				<input type="text" id="day-7-period-7-in" class="schedule-in" name="day-7-period-7-in">
 				<label for="day-7-period-1-in" class="period-label">Athletics</label>
 			</div>
 		</div>
@@ -238,35 +240,36 @@
 		<div class="cycle-day" id="day8">
 			<label for="day1" class="day-label">Day 8</label>
 			<div class="schedule-box" id="day-8-period-1">
-				<input type="text" id="day-8-period-1-in" class="schedule-in">
+				<input type="text" id="day-8-period-1-in" class="schedule-in" name="day-8-period-1-in">
 				<label for="day-8-period-1-in" class="period-label">Period 1</label>
 			</div>
 			<div class="schedule-box" id="day-8-period-2">
-				<input type="text" id="day-8-period-2-in" class="schedule-in">
+				<input type="text" id="day-8-period-2-in" class="schedule-in" name="day-8-period-2-in">
 				<label for="day-8-period-2-in" class="period-label">Period 2</label>
 			</div>
 			<div class="schedule-box" id="day-8-period-3">
-				<input type="text" id="day-8-period-3-in" class="schedule-in">
+				<input type="text" id="day-8-period-3-in" class="schedule-in" name="day-8-period-3-in">
 				<label for="day-8-period-3-in" class="period-label">Period 3</label>
 			</div>
 			<div class="schedule-box" id="day-8-period-4">
-				<input type="text" id="day-8-period-4-in" class="schedule-in">
+				<input type="text" id="day-8-period-4-in" class="schedule-in" name="day-8-period-4-in">
 				<label for="day-8-period-4-in" class="period-label">Period 4</label>
 			</div>
 			<div class="schedule-box" id="day-8-period-5">
-				<input type="text" id="day-8-period-5-in" class="schedule-in">
+				<input type="text" id="day-8-period-5-in" class="schedule-in" name="day-8-period-5-in">
 				<label for="day-8-period-1-in" class="period-label">Period 5</label>
 			</div>
 			<div class="schedule-box" id="day-8-period-6">
-				<input type="text" id="day-8-period-6-in" class="schedule-in">
+				<input type="text" id="day-8-period-6-in" class="schedule-in" name="day-8-period-6-in">
 				<label for="day-8-period-1-in" class="period-label">Period 6</label>
 			</div>
 			<div class="schedule-box" id="day-8-period-7">
-				<input type="text" id="day-8-period-7-in" class="schedule-in">
+				<input type="text" id="day-8-period-7-in" class="schedule-in" name="day-8-period-7-in">
 				<label for="day-8-period-1-in" class="period-label">Athletics</label>
 			</div>
 		</div>
 
 	</div>
+	<input type="submit" value="submit">
 </form>
 </body>
