@@ -225,7 +225,6 @@ remember to adjust for years!!!
 """
 
 app = Flask(__name__)
-global studentID
 
 @app.route("/schedule-filler/")
 def schedule_nav_page():
@@ -239,6 +238,7 @@ def index(): return render_template("index.html")
 @app.route("/fill_schedule", methods=["POST", "GET"])
 def fillSchedulePage():
     global studentSchedule
+    global studentID
     if request.method == "POST":
         studentID = request.form["studentID"]
         blockA = Course(request.form["blockA"], "A", isChecked(request.form.get("blockAlab", False)),
