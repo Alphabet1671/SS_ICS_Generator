@@ -9,9 +9,11 @@
 <body>
 <h1>Detailed Schedule</h1>
 <p>Down below is your full 8-day schedule as it is on the pdf file.</p>
+<h3>I know this page looks soo ugly that you might doubt its functionality, but I assure you this site works as intended.</h3>
+<h5>SERIOUSLY DOES ANYONE KNOW ANYTHING ABOUT HTML AND CSS????? I CAN USE SOME HELP</h5>
 <form action="{{ url_for('send_adv_schedule')}}" method="post">
 	<input type="text" class="stu-id-in" id="stu-id-in" name="stu-id-in">
-	<label for="stu-id-in" class="stu-id-in">Your Student ID here</label>
+	<label for="stu-id-in" class="stu-id-in">Your Student ID here (6-digit number)</label>
 	<div class="schedule-input">
 		<div class="cycle-day" id="day1">
 			<label for="day1" class="day-label">Day 1</label>

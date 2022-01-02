@@ -333,17 +333,17 @@ def send_adv_schedule():
 
     # Not completed backend!!!!
     advScheduleLst = [
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", ""],
+        ["", "", "", "", "", ""],
+        ["", "", "", "", "", ""],
+        ["", "", "", "", "", ""],
+        ["", "", "", "", "", ""],
+        ["", "", "", "", "", ""],
+        ["", "", "", "", "", ""],
+        ["", "", "", "", "", ""],
     ]
 
-    for day in range(0, 7):
+    for day in range(0, 8):
         for prd in range(0, 6):
             inputId = "day-"+str(day+1)+"-period-"+str(prd+1)+"-in"
             advScheduleLst[day][prd] = request.form[inputId]
@@ -358,13 +358,20 @@ def send_adv_schedule():
             timeObj = datetime.datetime.strptime(txt[0], "%A,%b%d").replace(year=currentTime.year)
             data = [timeObj, int(txt[1])]
             cycleDays.append(data)
+            print(data)
     f.close()
     # Pulled cycle day schedule from file
     f = open(studentID_adv+"_schedule.ics", "w")
+
+    for i in Heading:
+        f.write(i+"\n")
+
     for day in cycleDays:
         for p in range(0, 6):
+            print(day[1])
             if advScheduleLst[day[1]-1][p] != "":
-                new_event(advScheduleLst[day[1]-1][p], StartTime(p, False, False), EndTime(p, False, False, False), "School", day[0], f) #Need adjustment for Weds
+                isWed = (day[0].strftime("%w") == "3")
+                new_event(advScheduleLst[day[1]-1][p], StartTime(p+1, False, isWed), EndTime(p+1, True, isWed, False), "School", day[0], f)
     f.write("END:VCALENDAR")
     f.close()
     try:
