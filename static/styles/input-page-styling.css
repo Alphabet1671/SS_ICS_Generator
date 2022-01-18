@@ -1,6 +1,11 @@
 .schedule-input{
     display: grid;
     grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+    margin: auto;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+
 }
 .day-label{
     padding: 0px 0px 0px 0px;
@@ -12,18 +17,71 @@
 .cycle-day{
     display: grid;
     grid-template-rows: 5% 15% 15% 15% 15% 15% 15%;
-    padding: 10px;
+    grid-gap: 10px;
+    padding: 30px;
     width: 100%;
-    height: 100%;
+    height: 85%;
     background-color: rgb(4,30,66);
+    margin-bottom: 60px;
 }
 
 .schedule-box{
     display: grid;
     grid-template-rows: 70% 20%;
-    grid-gap: 0px;
-    border-top: 2px solid rgb(225,184,29);
+    grid-gap: 2px;
+    border-bottom: 2px solid rgb(225,184,29);
     width: 1fr;
-    height: 1fr;
+    height: 85%;
     color: rgb(225,184,29);
+    margin-bottom: auto;
 }
+input[type = submit] {
+    width: 50%;
+    font-size: 40px;
+    color: rgb(4,30,66);
+    background-color: rgb(225,184,29);
+    border: solid rgb(4,30,66);
+    border-radius: 10px;
+    margin: auto;
+
+}
+
+input.stu-id-in {
+    border: 3px solid rgb(224,184,29);
+    border-radius: 5px;
+    background-color: white;
+    width: 40%;
+    float: left;
+}
+
+form{
+    display: grid;
+    grid-template-rows: 10% 10% 100% 10% 10%;
+    grid-gap: 10px;
+    height: 150%;
+    margin: auto;
+    width: 100%;
+}
+
+p {
+    color: rgb(4,30,66);
+    text-align: center;
+    font-size: 20px;
+    padding: 30px;
+}
+
+h1 {
+    background-color: rgb(4,30,66);
+    color: rgb(255,184,29);
+    border-style: solid;
+    font-size: 50px;
+    padding: 30px 20px;
+    margin: auto;
+    width: 124%;
+}
+
+h4 {
+    text-align: center;
+    color: red;
+}
+
