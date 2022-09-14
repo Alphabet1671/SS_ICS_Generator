@@ -31,7 +31,6 @@ Monday,Oct17+6
 Tuesday,Oct18+7
 Wednesday,Oct19+8
 Thursday,Oct20+1
-Friday,Oct21+Friday
 Tuesday,Oct25+2
 Wednesday,Oct26+3
 Thursday,Oct27+4
@@ -50,7 +49,6 @@ Tuesday,Nov15+8
 Wednesday,Nov16+1
 Thursday,Nov17+2
 Friday,Nov18+3
-Monday,Nov21+Monday
 Monday,Nov28+4
 Tuesday,Nov29+5
 Wednesday,Nov30+6

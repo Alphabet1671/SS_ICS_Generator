@@ -1,6 +1,8 @@
 import random
 import datetime
 from flask import *
+import os
+from paddleocr import PaddleOCR
 
 """aws push command:
 aws lightsail push-container-image --service-name flask-service --label flask-container --image flask
@@ -93,29 +95,14 @@ class StudentSchedule:
         if label == "H": return self.H
 
 
-ScheduleForLouis = StudentSchedule(
-    "189716",
-    Course("Art of Persuasion", "A", False, True),
-    Course("Adv. Physics", "B", True, True),
-    Course("Free", "C", False, True),
-    Course("US History", "D", False, False),
-    Course("Latin I", "E", False, False),
-    Course("Symphonic Band", "F", False, False),
-    Course("Free", "G", False, True),
-    Course("Multi-Variable Calc", "H", False, True)
-)
-
-
 def StartTime(index, late, wed):
     return startTimeMap[int(wed)][index - 1][int(late)]
-
 
 def EndTime(index, late, wed, lab):
     if (index == 1 or index == 4) and (lab == True):
         return endTimeMap[int(wed)][index][int(late)]
     else:
         return endTimeMap[int(wed)][index - 1][int(late)]
-
 
 def period(day, period_):
     return periodMap[day][period_]
@@ -191,6 +178,7 @@ def isChecked(str):
 
 
 global studentSchedule
+global pdfFileIndex
 
 Heading = ['BEGIN:VCALENDAR',
            'METHOD:PUBLISH',
@@ -222,13 +210,12 @@ Heading = ['BEGIN:VCALENDAR',
 """
 Initializing the cycle day map
 
-This is to match cycle day with a datetime object.
-
-remember to adjust for years!!!
+This is to match cycle day with a datetime object
 
 """
 
 app = Flask(__name__)
+pdfFileIndex = 0
 
 @app.route("/schedule-filler/")
 def schedule_nav_page():
@@ -243,6 +230,7 @@ def index(): return render_template("index.html")
 def fillSchedulePage():
     global studentSchedule
     global studentID
+    global prevStudentID
     if request.method == "POST":
         studentID = request.form["studentID"]
         blockA = Course(request.form["blockA"], "A", isChecked(request.form.get("blockAlab", False)),
@@ -306,6 +294,13 @@ def fillSchedulePage():
             new_event(courseNameLst[i], startTimeLst[i], endTimeLst[i], "School", dateLst[i], f)
 
         f.write("END:VCALENDAR")
+
+    try:
+        os.remove(prevStudentID+".ics")
+    except Exception as e:
+        print(e)
+
+    prevStudentID = studentID
 
     return redirect("/file_download", 302)
 
@@ -383,6 +378,22 @@ def send_adv_schedule():
         return send_file(fileName, attachment_filename="Your Schedule.ics")
     except Exception as e:
         return str(e)
+
+@app.route("/ocr-filler/")
+def ocr_filler():
+    return render_template("ocr-filler.html")
+
+@app.route("/send-ocr-schedule/", methods = ["POST","GET"])
+def send_ocr_schedule():
+    if request.method == "POST":
+        pdfFile = request.files["schedule-pdf"]
+        pdfFile.save("pdfs/1.pdf")
+        ocr = PaddleOCR(use_angle_cls=True, lang = "en")
+        pdfPath = "pdfs/1.pdf"
+        result = ocr.ocr(pdfPath, cls = True)
+        for line in result:
+            print(line)
+
 
 
 if __name__ == "__main__":

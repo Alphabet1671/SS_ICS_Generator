@@ -1,0 +1,9 @@
+<html>
+   <body>
+      <form action = "{{url_for('send_ocr_schedule')}}" method = "POST"
+         enctype = "multipart/form-data">
+         <input type = "file" name = "schedule-pdf" />
+         <input type = "submit"/>
+      </form>
+   </body>
+</html>
