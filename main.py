@@ -1,8 +1,8 @@
 import random
 import datetime
 from flask import *
+from pdfminer.high_level import extract_text
 import os
-from paddleocr import PaddleOCR
 
 """aws push command:
 aws lightsail push-container-image --service-name flask-service --label flask-container --image flask
@@ -178,7 +178,6 @@ def isChecked(str):
 
 
 global studentSchedule
-global pdfFileIndex
 
 Heading = ['BEGIN:VCALENDAR',
            'METHOD:PUBLISH',
@@ -207,15 +206,8 @@ Heading = ['BEGIN:VCALENDAR',
            "END:VTIMEZONE"
            ]
 
-"""
-Initializing the cycle day map
-
-This is to match cycle day with a datetime object
-
-"""
 
 app = Flask(__name__)
-pdfFileIndex = 0
 
 @app.route("/schedule-filler/")
 def schedule_nav_page():
@@ -251,7 +243,6 @@ def fillSchedulePage():
                         isChecked(request.form.get("blockHlate", False)))
         studentSchedule = StudentSchedule(studentID, blockA, blockB, blockC, blockD, blockE, blockF, blockG, blockH)
 
-        print(studentSchedule)
         cycleDayMap = []
         f = open("blockSchedule.txt", "r")
         currentTime = datetime.datetime.now()
@@ -277,7 +268,7 @@ def fillSchedulePage():
             else:
                 isWed = 0
             for i in periodLst:
-                if studentSchedule.courseObj(i).name != "Free":
+                if studentSchedule.courseObj(i).name != "":
                     dateLst.append(day[0])
                     courseNameLst.append(studentSchedule.courseObj(i).name)
                     startTimeLst.append(StartTime(periodNum, studentSchedule.courseObj(i).late, isWed))
@@ -317,7 +308,7 @@ def file_downloads():
 def sendFile():
     try:
         fileName = studentID+"_schedule.ics"
-        return send_file(fileName, attachment_filename="Your Schedule.ics")
+        return send_file(fileName)
     except Exception as e:
         return str(e)
 
@@ -375,7 +366,7 @@ def send_adv_schedule():
     f.close()
     try:
         fileName = studentID_adv+"_schedule.ics"
-        return send_file(fileName, attachment_filename="Your Schedule.ics")
+        return send_file(fileName)
     except Exception as e:
         return str(e)
 
@@ -385,15 +376,66 @@ def ocr_filler():
 
 @app.route("/send-ocr-schedule/", methods = ["POST","GET"])
 def send_ocr_schedule():
+    global prevStudentID
     if request.method == "POST":
         pdfFile = request.files["schedule-pdf"]
-        pdfFile.save("pdfs/1.pdf")
-        ocr = PaddleOCR(use_angle_cls=True, lang = "en")
-        pdfPath = "pdfs/1.pdf"
-        result = ocr.ocr(pdfPath, cls = True)
-        for line in result:
-            print(line)
+        pdfFile.save("temp.pdf")
+        extractedText = extract_text("temp.pdf")
+        extractedBlocks = extractedText.split("\n\n")
+        extractedBlocks = extractedBlocks[17:30]
 
+        blocksList = ["","","","","","","",""]  # order(0-7) ABCDEFGH
+        locationList = ["","","","","","","",""]
+        lateList = [0,0,0,0,0,0,0,0]
+
+
+        for block in extractedBlocks:
+            txt = block.replace("\n", " ")
+            if txt[0:11] != "Unscheduled" and txt[0:9] != "Community":
+                periodInfoStr = txt[txt.index("(")+8:txt.index(")")-1]
+                currentBlockPeriod = ord(periodInfoStr[0])-ord("A")
+                blocksList[currentBlockPeriod] = block.split("\n")[0].replace(":", "")
+                locationList[currentBlockPeriod] = block.split("\n")[-1]
+                if periodInfoStr[-1] == "L": lateList[currentBlockPeriod] = 1
+                else: lateList[currentBlockPeriod] = 0
+
+        cycleDayMap = []
+        f = open("blockSchedule.txt", "r")
+        currentTime = datetime.datetime.now()
+        for lineTxt in f:
+            txt = lineTxt.split("+")
+            if txt[0] != "\n":
+                timeObj = datetime.datetime.strptime(txt[0], "%A,%b%d").replace(year=currentTime.year)
+                data = [timeObj, txt[1]]
+                cycleDayMap.append(data)
+
+        f.close()
+
+        print(cycleDayMap)
+
+        f = open("testICS.ics", "w")
+
+        for i in Heading:
+            f.write(i + "\n")
+
+        for day in cycleDayMap:
+            periodLst = periodMap[int(day[1]) - 1]
+            periodNum = 1
+            if day[0].strftime("%w") == "3":
+                isWed = 1
+            else:
+                isWed = 0
+            for i in periodLst:
+                j = ord(i)-ord("A")
+                if blocksList[j] != "":
+                    new_event(blocksList[j], StartTime(periodNum, lateList[j], isWed), EndTime(periodNum, lateList[j], isWed, 0), locationList[j], day[0], f)
+                periodNum += 1
+        f.write("END:VCALENDAR")
+        try:
+            fileName = "testICS.ics"
+            return send_file(fileName)
+        except Exception as e:
+            return str(e)
 
 
 if __name__ == "__main__":
