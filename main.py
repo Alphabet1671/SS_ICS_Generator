@@ -374,6 +374,14 @@ def send_adv_schedule():
 def ocr_filler():
     return render_template("ocr-filler.html")
 
+@app.route("/ocr-download/")
+def download_ocr_file():
+    try:
+        fileName = "testICS.ics"
+        return send_file(fileName)
+    except Exception as e:
+        return str(e)
+
 @app.route("/send-ocr-schedule/", methods = ["POST","GET"])
 def send_ocr_schedule():
     global prevStudentID
@@ -415,6 +423,7 @@ def send_ocr_schedule():
 
         f = open("testICS.ics", "w")
 
+
         for i in Heading:
             f.write(i + "\n")
 
@@ -430,12 +439,11 @@ def send_ocr_schedule():
                 if blocksList[j] != "":
                     new_event(blocksList[j], StartTime(periodNum, lateList[j], isWed), EndTime(periodNum, lateList[j], isWed, 0), locationList[j], day[0], f)
                 periodNum += 1
+
         f.write("END:VCALENDAR")
-        try:
-            fileName = "testICS.ics"
-            return send_file(fileName)
-        except Exception as e:
-            return str(e)
+
+
+        return redirect("/ocr-download/")
 
 
 if __name__ == "__main__":
