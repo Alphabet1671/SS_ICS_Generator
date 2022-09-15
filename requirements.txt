@@ -1,5 +1,4 @@
 flask
-pikepdf <6
 pdfminer.six
 
 

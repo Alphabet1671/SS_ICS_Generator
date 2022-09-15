@@ -4,9 +4,19 @@ EXPOSE 2328
 
 WORKDIR /app
 
+
 COPY requirements.txt .
 
+
+RUN apk update && apk add python3-dev \
+                          gcc \
+                          libc-dev \
+                          libffi-dev
+
+
 RUN pip install -r requirements.txt
+
+
 
 COPY . /app
 COPY main.py /app
