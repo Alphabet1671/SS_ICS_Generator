@@ -1,9 +1,26 @@
 <html>
-   <body>
-      <form action = "{{url_for('send_ocr_schedule')}}" method = "POST"
-         enctype = "multipart/form-data">
-         <input type = "file" name = "schedule-pdf" />
-         <input type = "submit"/>
-      </form>
-   </body>
+<head>
+    <meta charset="UTF-8">
+    <title>SSA Student Tools</title>
+    <link rel= "stylesheet" href= "{{ url_for('static',filename='styles/site-styling.css') }}">
+    <link rel= "stylesheet" href="/static/styles/site-styling.css">
+</head>
+
+<body>
+<h1>Upload your schedule pdf here!</h1>
+<p class="ocr-description">
+   To get access to the pdf file of your schedule, please do the following:</br>
+   1. login to the Veracross student portal.</br>
+   2. click "Classes & Reports."</br>
+   3. Under "Reports", click "Current Class Schedule."</br>
+   4. Click "Print to PDF" in the top right corner.</br>
+</p>
+   <form action = "{{url_for('send_ocr_schedule')}}" method = "POST" enctype = "multipart/form-data" class = "course-input">
+      <input type = "file" name = "schedule-pdf" />
+      <input type = "submit"/>
+   </form>
+
+
+<p class="credit">This website is developed by Louis Ye, class of 23. </br>Email address:  23yel@shadysideacademy.org</p>
+</body>
 </html>
