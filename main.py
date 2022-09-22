@@ -404,7 +404,8 @@ def send_ocr_schedule():
                 periodInfoStr = txt[txt.index("(")+8:txt.index(")")-1]
                 currentBlockPeriod = ord(periodInfoStr[0])-ord("A")
                 blocksList[currentBlockPeriod] = block.split("\n")[0].replace(":", "")
-                locationList[currentBlockPeriod] = block.split("\n")[-1]
+                locationList[currentBlockPeriod] = block[block.index(")")+1:len(block)].replace("\n","")
+                print (locationList[currentBlockPeriod])
                 if periodInfoStr[-1] == "L": lateList[currentBlockPeriod] = 1
                 else: lateList[currentBlockPeriod] = 0
 
