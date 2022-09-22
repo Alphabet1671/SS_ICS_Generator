@@ -6,7 +6,7 @@ import os
 
 """
 lightsail push command:
-aws lightsail push-container-image --service-name flask-service --label flask-container --image flask
+aws lightsail push-container-image --service-name flask-service --label flask-container --image flask --region ca-central-1
 
 """
 
@@ -446,6 +446,20 @@ def send_ocr_schedule():
 
         return redirect("/ocr-download/")
 
+
+@app.route("/upload-cycle-days/")
+def upload_cycle_days():
+    return render_template("cycle-days-upload.html")
+
+@app.route("/write-cycle-days/", methods = ["POST","GET"])
+def write_cycle_days():
+    if request.method == "POST":
+        txtFile = request.files["cycle-days-txt"]
+        os.remove("blockSchedule.txt")
+        txtFile.save("blockSchedule.txt")
+
+
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(port=2328, host="0.0.0.0", debug=True)
