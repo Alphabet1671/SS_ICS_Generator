@@ -391,7 +391,7 @@ def send_ocr_schedule():
         pdfFile.save("temp.pdf")
         extractedText = extract_text("temp.pdf")
         extractedBlocks = extractedText.split("\n\n")
-        extractedBlocks = extractedBlocks[17:30]
+        extractedBlocks = extractedBlocks[20:40]
 
         blocksList = ["","","","","","","",""]  # order(0-7) ABCDEFGH
         locationList = ["","","","","","","",""]
