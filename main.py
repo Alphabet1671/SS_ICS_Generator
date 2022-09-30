@@ -118,6 +118,14 @@ def random_UID():
 
 
 def new_event(name, startTime, endTime, location, t, f):
+    """
+    OK this function is kinda poop, it would be better if startTime and endTime parameter can be passed through as dateTime object.
+    
+    This would require some changes in the startTimeMap and endTimeMap arrays.
+    It would also need the complete restructure of the algorithm.
+    
+    """
+    
     year = t.strftime("%Y")
     month = t.strftime("%m")
     day = t.strftime("%d")
