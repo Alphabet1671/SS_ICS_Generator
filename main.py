@@ -400,12 +400,12 @@ def send_ocr_schedule():
 
         for block in extractedBlocks:
             txt = block.replace("\n", " ")
-            if txt[0:11] != "Unscheduled" and txt[0:9] != "Community":
+            print(txt[-3:-1])
+            if ":" in txt and txt[0:11] != "Unscheduled":
                 periodInfoStr = txt[txt.index("(")+8:txt.index(")")-1]
                 currentBlockPeriod = ord(periodInfoStr[0])-ord("A")
-                blocksList[currentBlockPeriod] = block.split("\n")[0].replace(":", "")
-                locationList[currentBlockPeriod] = block[block.index(")")+1:len(block)].replace("\n","")
-                print (locationList[currentBlockPeriod])
+                blocksList[currentBlockPeriod] = txt[0:txt.index(":")]
+                locationList[currentBlockPeriod] = block[block.index(")")+1:len(block)].replace("\n", " ")
                 if periodInfoStr[-1] == "L": lateList[currentBlockPeriod] = 1
                 else: lateList[currentBlockPeriod] = 0
 
@@ -423,7 +423,7 @@ def send_ocr_schedule():
 
         print(cycleDayMap)
 
-        f = open("testICS.ics", "w")
+        f = open("Your Schedule.ics", "w")
 
 
         for i in Heading:
