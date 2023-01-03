@@ -386,7 +386,7 @@ def ocr_filler():
 @app.route("/ocr-download/")
 def download_ocr_file():
     try:
-        fileName = "testICS.ics"
+        fileName = "Your Schedule.ics"
         return send_file(fileName)
     except Exception as e:
         return str(e)
@@ -399,7 +399,7 @@ def send_ocr_schedule():
         pdfFile.save("temp.pdf")
         extractedText = extract_text("temp.pdf")
         extractedBlocks = extractedText.split("\n\n")
-        extractedBlocks = extractedBlocks[20:40]
+        extractedBlocks = extractedBlocks[15:45]
 
         blocksList = ["","","","","","","",""]  # order(0-7) ABCDEFGH
         locationList = ["","","","","","","",""]
@@ -408,15 +408,21 @@ def send_ocr_schedule():
 
         for block in extractedBlocks:
             txt = block.replace("\n", " ")
-            print(txt[-3:-1])
-            if ":" in txt and txt[0:11] != "Unscheduled":
+            print(txt)
+            if ":" in txt and txt[0:11] != "Unscheduled" and txt[0:9] != "Community":
                 periodInfoStr = txt[txt.index("(")+8:txt.index(")")-1]
                 currentBlockPeriod = ord(periodInfoStr[0])-ord("A")
-                blocksList[currentBlockPeriod] = txt[0:txt.index(":")]
-                locationList[currentBlockPeriod] = block[block.index(")")+1:len(block)].replace("\n", " ")
-                if periodInfoStr[-1] == "L": lateList[currentBlockPeriod] = 1
-                else: lateList[currentBlockPeriod] = 0
+                rep = False
+                for a in blocksList:
+                    if a == txt[0:txt.index(":")]: rep = True
 
+                if(rep == False):
+                    blocksList[currentBlockPeriod] = txt[0:txt.index(":")]
+                    locationList[currentBlockPeriod] = block[block.index(")")+1:len(block)].replace("\n", " ")
+                    if periodInfoStr[-1] == "L": lateList[currentBlockPeriod] = 1
+                    else: lateList[currentBlockPeriod] = 0
+
+        print(blocksList)
         cycleDayMap = []
         f = open("blockSchedule.txt", "r")
         currentTime = datetime.datetime.now()
