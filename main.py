@@ -283,7 +283,6 @@ def fillSchedulePage():
                     startTimeLst.append(StartTime(periodNum, studentSchedule.courseObj(i).late, isWed))
                     endTimeLst.append(
                         EndTime(periodNum, studentSchedule.courseObj(i).late, isWed, studentSchedule.courseObj(i).lab))
-                    print(str(day[0]) + "=" + studentSchedule.courseObj(i).name + "=" + str(periodNum) + "\n")
                 periodNum += 1
 
         f = open(studentSchedule.studentID + "_schedule.ics", "w")
@@ -357,7 +356,6 @@ def send_adv_schedule():
             timeObj = datetime.datetime.strptime(txt[0], "%A,%b%d").replace(year=currentTime.year)
             data = [timeObj, int(txt[1])]
             cycleDays.append(data)
-            print(data)
     f.close()
     # Pulled cycle day schedule from file
     f = open(studentID_adv+"_schedule.ics", "w")
@@ -367,7 +365,6 @@ def send_adv_schedule():
 
     for day in cycleDays:
         for p in range(0, 6):
-            print(day[1])
             if advScheduleLst[day[1]-1][p] != "":
                 isWed = (day[0].strftime("%w") == "3")
                 new_event(advScheduleLst[day[1]-1][p], StartTime(p+1, False, isWed), EndTime(p+1, True, isWed, False), "School", day[0], f)
@@ -408,7 +405,6 @@ def send_ocr_schedule():
 
         for block in extractedBlocks:
             txt = block.replace("\n", " ")
-            print(txt)
             if ":" in txt and txt[0:11] != "Unscheduled" and txt[0:9] != "Community":
                 periodInfoStr = txt[txt.index("(")+8:txt.index(")")-1]
                 currentBlockPeriod = ord(periodInfoStr[0])-ord("A")
@@ -418,11 +414,16 @@ def send_ocr_schedule():
 
                 if(rep == False):
                     blocksList[currentBlockPeriod] = txt[0:txt.index(":")]
-                    locationList[currentBlockPeriod] = block[block.index(")")+1:len(block)].replace("\n", " ")
+                    locationStr = block[block.index(")")+1:len(block)].replace("\n", " ")
+                    if len(locationStr) > 35: #fuck Veracross why do I have to do this
+                        print (locationStr)
+                        tempLst = locationStr.split(" ")
+                        locationStr = str(tempLst[1:tempLst.index("-")+3]).replace("[","").replace("'","").replace("]","").replace(",","")
+                        print(locationStr)
+                    locationList[currentBlockPeriod] = locationStr
                     if periodInfoStr[-1] == "L": lateList[currentBlockPeriod] = 1
                     else: lateList[currentBlockPeriod] = 0
 
-        print(blocksList)
         cycleDayMap = []
         f = open("blockSchedule.txt", "r")
         currentTime = datetime.datetime.now()
@@ -435,7 +436,6 @@ def send_ocr_schedule():
 
         f.close()
 
-        print(cycleDayMap)
 
         f = open("Your Schedule.ics", "w")
 
