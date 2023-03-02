@@ -3,3 +3,10 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+
+temp.pdf
+getBlockSchedule.py
+blockSchedule.txt
+Your Schedule.ics
+
