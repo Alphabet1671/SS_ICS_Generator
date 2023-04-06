@@ -8,8 +8,8 @@ from bs4 import BeautifulSoup
 
 url = "https://portals.veracross.com/ssa/student/student/daily-schedule"
 
-webUsnm = "23yel"
-webPswd = "LiYe9716"
+webUsnm = input("Enter Veracross Username:")
+webPswd = input("Enter Veracross Password:")
 # These to variables are the login username and password for veracross.
 
 totDays = int(input("How many days of your schedule would you like to pull from Veracross?"))
